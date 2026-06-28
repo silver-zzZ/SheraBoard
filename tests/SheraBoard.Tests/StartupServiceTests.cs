@@ -16,6 +16,18 @@ public sealed class StartupServiceTests
     }
 
     [Fact]
+    public void SetStartWithWindows_RewritesExistingEntryToCurrentExecutablePath()
+    {
+        var store = new InMemoryStartupEntryStore();
+        store.SetValue("SheraBoard", @"""C:\Users\Someone\Downloads\Old\SheraBoard.exe""");
+        var service = new StartupService("SheraBoard", () => @"D:\Apps\SheraBoard\SheraBoard.exe", store);
+
+        service.SetStartWithWindows(true);
+
+        Assert.Equal(@"""D:\Apps\SheraBoard\SheraBoard.exe""", store.GetValue("SheraBoard"));
+    }
+
+    [Fact]
     public void SetStartWithWindows_DisabledDeletesStartupEntry()
     {
         var store = new InMemoryStartupEntryStore();
@@ -59,6 +71,16 @@ public sealed class StartupServiceTests
     {
         Assert.True(StartupService.TryExtractExecutablePath(command, out var executablePath));
         Assert.Equal(expected, executablePath);
+    }
+
+    [Fact]
+    public void TrySetStartWithWindows_ReturnsFalseWhenExecutablePathCannotBeResolved()
+    {
+        var store = new InMemoryStartupEntryStore();
+        var service = new StartupService("SheraBoard", () => null, store);
+
+        Assert.False(service.TrySetStartWithWindows(true));
+        Assert.Null(store.GetValue("SheraBoard"));
     }
 
     private sealed class InMemoryStartupEntryStore : IStartupEntryStore

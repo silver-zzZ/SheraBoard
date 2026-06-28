@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.IO;
+using System.Security;
 using Microsoft.Win32;
 
 namespace SheraBoard.App.Services;
@@ -53,6 +54,19 @@ public sealed class StartupService
         else
         {
             _store.DeleteValue(_applicationName);
+        }
+    }
+
+    public bool TrySetStartWithWindows(bool enabled)
+    {
+        try
+        {
+            SetStartWithWindows(enabled);
+            return true;
+        }
+        catch (Exception ex) when (ex is IOException or SecurityException or UnauthorizedAccessException or InvalidOperationException)
+        {
+            return false;
         }
     }
 

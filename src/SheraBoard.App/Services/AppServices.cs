@@ -152,6 +152,7 @@ public sealed class AppServices
         var foregroundWindowService = new ForegroundWindowService();
         var restoreService = new RestoreService(payloadStore);
         var startupService = new StartupService("SheraBoard");
+        startupService.TrySetStartWithWindows(settings.StartWithWindows);
 
         return new AppServices(
             storageLocationStore,
