@@ -1,0 +1,30 @@
+<Window x:Class="SheraBoard.App.ImagePreviewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="图片预览"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowState="Maximized"
+        ShowInTaskbar="False"
+        Topmost="True"
+        AllowsTransparency="True"
+        Background="Transparent"
+        KeyDown="Window_KeyDown">
+    <Grid x:Name="OverlayRoot"
+          Background="#D9000000"
+          ClipToBounds="True"
+          PreviewMouseWheel="OverlayRoot_PreviewMouseWheel"
+          MouseLeftButtonDown="OverlayRoot_MouseLeftButtonDown">
+        <Image x:Name="PreviewImage"
+               Stretch="Fill"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               SnapsToDevicePixels="True"
+               Cursor="SizeAll"
+               MouseLeftButtonDown="PreviewImage_MouseLeftButtonDown"
+               MouseLeftButtonUp="PreviewImage_MouseLeftButtonUp"
+               MouseMove="PreviewImage_MouseMove"
+               MouseLeave="PreviewImage_MouseLeftButtonUp"
+               MouseDown="PreviewImage_MouseDown"/>
+    </Grid>
+</Window>

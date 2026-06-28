@@ -1,0 +1,42 @@
+# Build output
+bin/
+obj/
+artifacts/
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# IDE and user files
+.vs/
+.vscode/
+.idea/
+.superpowers/
+*.user
+*.suo
+*.rsuser
+
+# Local app data and clipboard payloads
+data/
+payloads/
+file-snapshots/
+settings.json
+*.sqlite3
+*.sqlite3-shm
+*.sqlite3-wal
+*.payload
+
+# Release binaries and archives
+SheraBoard.exe
+*.zip
+*.7z
+*.nupkg
+
+# Local scratch files
+tmp/
+backups/
+*.log
+
+# OS files
+Thumbs.db
+.DS_Store
