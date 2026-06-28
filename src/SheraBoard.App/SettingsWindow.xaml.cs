@@ -23,7 +23,7 @@ public partial class SettingsWindow : Window
     {
         var settings = _services.Settings;
         CapturePausedBox.IsChecked = settings.CapturePaused;
-        StartWithWindowsBox.IsChecked = settings.StartWithWindows;
+        StartWithWindowsBox.IsChecked = _services.StartupService.IsStartWithWindowsEnabled();
         CloseAfterCopyBox.IsChecked = settings.CloseWindowAfterCopy;
         HotkeyBox.Text = settings.GlobalHotkey;
         MaxStorageBox.Text = Math.Max(1, settings.MaxStorageBytes / 1024 / 1024).ToString(CultureInfo.InvariantCulture);
