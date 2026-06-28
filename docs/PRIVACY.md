@@ -17,6 +17,7 @@ SheraBoard 会在本机保存：
 ```
 
 用户也可以在设置页修改存储位置。
+更详细的路径规则见 [DATA_STORAGE.md](DATA_STORAGE.md)。
 
 ## 加密边界
 
