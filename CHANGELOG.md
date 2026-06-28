@@ -12,6 +12,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Added CI and release packaging workflows.
 - Added usage and privacy documentation.
 
+### Changed
+
+- Polished public-facing Chinese copy and made development environment requirements explicit.
+
 ## v0.1.1
 
 ### Changed
@@ -23,7 +27,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
-- Windows clipboard history app built with .NET 8 and WPF.
-- Local history for text, rich text, images, and file lists.
-- `Win+V` main history window, tray menu, settings, favorites, and pinning.
-- Local SQLite storage with DPAPI-protected payload files.
+- Windows 本地剪贴板历史工具，支持保存和找回复制过的文字、富文本、图片和文件列表。
+- `Win+V` 主历史窗口、托盘菜单、设置页、收藏和置顶。
+- 本地 SQLite 存储，剪贴板 payload 使用 Windows DPAPI 按当前用户保护。

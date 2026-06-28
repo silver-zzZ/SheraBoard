@@ -5,8 +5,9 @@
 ## 开发环境
 
 - Windows 10/11
+- Visual Studio 2022
+- Visual Studio 安装“.NET 桌面开发”工作负载
 - .NET 8 SDK
-- Visual Studio 2022 或任意支持 .NET/WPF 的编辑器
 
 ## 本地检查
 
