@@ -96,6 +96,22 @@ function New-ReleaseZip([string] $PackageKind, [string] $StagingDir, [string] $R
     return $zipPath
 }
 
+function Copy-StandaloneExe([string] $StagingDir, [string] $ReleaseVersion) {
+    $sourceExe = Join-Path $StagingDir 'SheraBoard.exe'
+    $targetExe = Join-Path $releaseDir "SheraBoard-$ReleaseVersion-$runtime-standalone.exe"
+
+    Copy-Item -LiteralPath $sourceExe -Destination $targetExe -Force
+    return $targetExe
+}
+
+function Copy-LocalExe([string] $StagingDir) {
+    $sourceExe = Join-Path $StagingDir 'SheraBoard.exe'
+    $targetExe = Join-Path $root 'SheraBoard.exe'
+
+    Copy-Item -LiteralPath $sourceExe -Destination $targetExe -Force
+    return $targetExe
+}
+
 $releaseVersion = Get-ReleaseVersion
 $releaseDir = Reset-Directory $releaseDir
 $stagingRoot = Reset-Directory $stagingRoot
@@ -106,6 +122,8 @@ if ($Mode -eq 'all' -or $Mode -eq 'standalone') {
         -PackageKind 'standalone' `
         -SelfContained $true `
         -EnableCompression $true
+    $localExe = Copy-LocalExe -StagingDir $standaloneStaging
+    $packages.Add((Copy-StandaloneExe -StagingDir $standaloneStaging -ReleaseVersion $releaseVersion)) | Out-Null
     $packages.Add((New-ReleaseZip -PackageKind 'standalone' -StagingDir $standaloneStaging -ReleaseVersion $releaseVersion)) | Out-Null
 }
 
@@ -130,3 +148,8 @@ if (Test-Path -LiteralPath $stagingRoot) {
 Write-Host "Release packages created in:"
 Write-Host $releaseDir
 Get-ChildItem -LiteralPath $releaseDir -File | Select-Object Name, Length
+
+if ($localExe) {
+    Write-Host "Local executable created:"
+    Write-Host $localExe
+}

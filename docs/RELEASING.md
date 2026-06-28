@@ -50,11 +50,28 @@ git status --short
 artifacts\release
 ```
 
+同时会生成一个本地运行用文件：
+
+```text
+SheraBoard.exe
+```
+
+这个根目录 exe 方便本机直接运行，已被 `.gitignore` 排除，不进入 Git 提交。
+
 发布包说明：
 
-- `standalone`：体积较大，内置 .NET 运行时，普通用户优先下载。
-- `framework-dependent`：体积较小，需要用户安装 .NET 8 Windows Desktop Runtime。
+- `standalone.exe`：体积较大，内置 .NET 运行时，普通用户可直接下载运行。
+- `standalone.zip`：同样内置 .NET 运行时，适合希望先解压再运行的用户。
+- `framework-dependent.zip`：体积较小，需要用户安装 .NET 8 Windows Desktop Runtime。
 - `SHA256SUMS.txt`：发布包校验值。
+
+普通用户下载 `standalone.exe` 后可直接运行；下载 `standalone.zip` 后，解压即可看到并运行 `SheraBoard.exe`。exe 是发布资产，不提交到 Git 源码历史里。
+
+开源桌面项目通常这样安排：
+
+- GitHub `Code` 页：源码、文档、测试、构建脚本。
+- GitHub `Releases` 页：给普通用户下载的 exe、zip、安装包、校验文件。
+- GitHub Actions：每次打版本 tag 时自动测试、打包并上传 Release assets。
 
 ## GitHub Release
 
