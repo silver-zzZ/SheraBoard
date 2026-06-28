@@ -1,31 +1,16 @@
-# 发布与上传手册
+# Maintainer Release Guide
 
-## 第一次上传到 GitHub
+This document is for maintainers publishing a new SheraBoard release.
 
-在项目根目录执行：
+## Preflight
 
-```powershell
-git init -b main
-git add .
-git commit -m "Prepare open source release"
-git remote add origin https://github.com/<your-name>/SheraBoard.git
-git push -u origin main
-```
-
-如果本机 Git 版本不支持 `git init -b main`：
-
-```powershell
-git init
-git branch -M main
-```
-
-上传前检查：
+Before publishing, check the working tree:
 
 ```powershell
 git status --short
 ```
 
-确认没有这些文件：
+These files and directories must not be tracked by Git:
 
 - `data/`
 - `payloads/`
@@ -38,63 +23,55 @@ git status --short
 - `backups/`
 - `tmp/`
 
-## 本地生成发布包
+Run tests:
 
 ```powershell
-.\scripts\publish.ps1 -Version v0.1.0 -Mode all
+dotnet test SheraBoard.sln
 ```
 
-输出目录：
+## Build Release Assets
+
+```powershell
+.\scripts\publish.ps1 -Version v0.1.1 -Mode all
+```
+
+Output directory:
 
 ```text
 artifacts\release
 ```
 
-同时会生成一个本地运行用文件：
+The script creates:
 
-```text
-SheraBoard.exe
-```
+- `SheraBoard-<version>-win-x64-standalone.exe`
+- `SheraBoard-<version>-win-x64-standalone.zip`
+- `SheraBoard-<version>-win-x64-framework-dependent.zip`
+- `SHA256SUMS.txt`
 
-这个根目录 exe 方便本机直接运行，已被 `.gitignore` 排除，不进入 Git 提交。
+It also refreshes the local root `SheraBoard.exe` for maintainer testing. That file is ignored by Git and must not be committed.
 
-发布包说明：
+## Publish
 
-- `standalone.exe`：体积较大，内置 .NET 运行时，普通用户可直接下载运行。
-- `standalone.zip`：同样内置 .NET 运行时，适合希望先解压再运行的用户。
-- `framework-dependent.zip`：体积较小，需要用户安装 .NET 8 Windows Desktop Runtime。
-- `SHA256SUMS.txt`：发布包校验值。
-
-普通用户下载 `standalone.exe` 后可直接运行；下载 `standalone.zip` 后，解压即可看到并运行 `SheraBoard.exe`。exe 是发布资产，不提交到 Git 源码历史里。
-
-开源桌面项目通常这样安排：
-
-- GitHub `Code` 页：源码、文档、测试、构建脚本。
-- GitHub `Releases` 页：给普通用户下载的 exe、zip、安装包、校验文件。
-- GitHub Actions：每次打版本 tag 时自动测试、打包并上传 Release assets。
-
-## GitHub Release
-
-推荐用 tag 触发自动发布：
+Publish by pushing a version tag:
 
 ```powershell
-git tag v0.1.0
-git push origin v0.1.0
+git tag -a v0.1.1 -m "SheraBoard v0.1.1"
+git push origin main
+git push origin v0.1.1
 ```
 
-`.github/workflows/release.yml` 会在 Windows runner 上运行测试、生成发布包，并创建或更新 GitHub Release。
+`.github/workflows/release.yml` runs tests, builds release assets on Windows, and creates or updates the GitHub Release.
 
-也可以在 GitHub Actions 页面手动运行 `Release` workflow，输入版本号，例如：
+The Release workflow can also be run manually from GitHub Actions with a version input, for example:
 
 ```text
-v0.1.0
+v0.1.1
 ```
 
-## 版本号建议
+## Versioning
 
-使用语义化版本：
+Use semantic version tags:
 
-- `v0.1.0`：首个公开版本。
-- `v0.1.1`：修 bug。
-- `v0.2.0`：增加功能。
-- `v1.0.0`：认为核心体验稳定后再发布。
+- `v0.1.1`: bug fix or documentation correction.
+- `v0.2.0`: user-facing feature.
+- `v1.0.0`: stable core experience.
