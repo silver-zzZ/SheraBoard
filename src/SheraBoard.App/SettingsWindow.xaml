@@ -23,7 +23,7 @@
                     Click="SearchHelpButton_Click"/>
             <StackPanel>
                 <TextBlock Text="设置" FontSize="20" FontWeight="SemiBold"/>
-                <TextBlock Text="记录、快捷键与数据位置" Foreground="{StaticResource MutedTextBrush}" FontSize="12" Margin="0,2,0,0"/>
+                <TextBlock Text="记录、Win+V 与数据位置" Foreground="{StaticResource MutedTextBrush}" FontSize="12" Margin="0,2,0,0"/>
             </StackPanel>
         </DockPanel>
 
@@ -51,8 +51,13 @@
                               Margin="20,0,0,0"/>
                 </StackPanel>
 
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="快捷键" Foreground="{StaticResource MutedTextBrush}" VerticalAlignment="Center"/>
-                <TextBox x:Name="HotkeyBox" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,0,8"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="备用快捷键" Foreground="{StaticResource MutedTextBrush}" VerticalAlignment="Center"/>
+                <TextBox x:Name="HotkeyBox"
+                         Grid.Row="1"
+                         Grid.Column="1"
+                         Grid.ColumnSpan="2"
+                         Margin="0,0,0,8"
+                         ToolTip="Win+V 是主快捷键，会替代 Windows 原生剪贴板历史；这里是额外备用快捷键。"/>
 
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="容量上限" Foreground="{StaticResource MutedTextBrush}" VerticalAlignment="Center"/>
                 <TextBox x:Name="MaxStorageBox" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,0,8"/>

@@ -9,10 +9,13 @@ public sealed class WindowsClipboardShortcutModeTests
         var settingsXaml = File.ReadAllText(FindProjectFile("src", "SheraBoard.App", "SettingsWindow.xaml"));
         var settingsCode = File.ReadAllText(FindProjectFile("src", "SheraBoard.App", "SettingsWindow.xaml.cs"));
         var appServicesSource = File.ReadAllText(FindProjectFile("src", "SheraBoard.App", "Services", "AppServices.cs"));
+        var mainWindowXaml = File.ReadAllText(FindProjectFile("src", "SheraBoard.App", "MainWindow.xaml"));
 
         Assert.DoesNotContain("OverrideWindowsClipboardShortcut", settingsSource);
         Assert.DoesNotContain("WinVOverrideBox", settingsXaml);
         Assert.DoesNotContain("接管 Win+V", settingsXaml);
+        Assert.Contains("备用快捷键", settingsXaml);
+        Assert.Contains("Win+V", mainWindowXaml);
         Assert.DoesNotContain("WinVOverrideBox", settingsCode);
         Assert.Contains("SetWindowsClipboardShortcutOverride(true)", appServicesSource);
     }
