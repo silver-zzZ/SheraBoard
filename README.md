@@ -8,12 +8,10 @@ SheraBoard 是一款 Windows 本地剪贴板历史工具。复制过的文字、
 
 正式版本在 [GitHub Releases](https://github.com/silver-zzZ/SheraBoard/releases/latest) 下载。
 
-- 普通用户：不要下载源码压缩包，去 Releases 下载带 exe 的发布包。
+- 普通用户推荐从 Releases 下载带 exe 的发布包。
 - 推荐下载：`SheraBoard-*-win-x64-standalone.zip`，解压后运行 `SheraBoard.exe`。
 - 单文件版：`SheraBoard-*-win-x64-standalone.exe`，内置 .NET 运行时，下载后直接运行。
 - 小体积版：`SheraBoard-*-win-x64-framework-dependent.zip`，需要先安装 [.NET 8 Windows Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/8.0)。
-
-源码仓库不提交 exe、zip、数据库、剪贴板 payload 或其他本机产物。可执行文件放在 GitHub Releases 里。
 
 ## 能做什么
 
@@ -24,7 +22,7 @@ SheraBoard 是一款 Windows 本地剪贴板历史工具。复制过的文字、
 - 鼠标悬停即可预览完整文字、文件列表和图片内容。
 - 支持固定常用记录，双击或右键恢复到系统剪贴板。
 - 支持开机启动、复制后隐藏窗口、忽略指定进程、容量上限和本机数据位置设置。
-- 剪贴板正文、图片等 payload 使用 Windows DPAPI 按当前用户加密保存。
+- 数据默认保存在本机，并使用 Windows 用户级加密保护。
 
 ## 界面预览
 
@@ -66,8 +64,7 @@ SheraBoard 是一款 Windows 本地剪贴板历史工具。复制过的文字、
 %LOCALAPPDATA%\SheraBoard
 ```
 
-更完整的使用说明见 [docs/USAGE.md](docs/USAGE.md)，本地数据与隐私说明见 [docs/PRIVACY.md](docs/PRIVACY.md)。
-数据路径、自启路径和每台电脑的本地存储规则见 [docs/DATA_STORAGE.md](docs/DATA_STORAGE.md)。
+更多使用细节见 [docs/USAGE.md](docs/USAGE.md)，数据路径和开机启动规则见 [docs/DATA_STORAGE.md](docs/DATA_STORAGE.md)。
 
 ## 开发
 
