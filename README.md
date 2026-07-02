@@ -2,8 +2,6 @@
 
 SheraBoard 是一款 Windows 本地剪贴板历史工具。复制过的文字、链接、代码、图片和文件，都可以搜索、预览、固定，并一键放回系统剪贴板。
 
-> 截图使用演示数据，不包含个人剪贴板内容。
-
 ![SheraBoard 界面概览](docs/images/sheraboard-overview.png)
 
 ## 下载
